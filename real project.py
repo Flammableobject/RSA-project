@@ -45,7 +45,7 @@ if i == 'e':
     #merge all the elements to get bit sequence
     a[0:len(a)] = [''.join(a[0 :len(a)])]
     b = a[0] #b = bit sequence
-    #keygen
+    #keygen from above func
     getLowLevelPrime(n)
         
 
