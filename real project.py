@@ -1,5 +1,8 @@
 # Pre generated primes
 from math import *
+from primeGenerator import *
+from ED import *
+from EDbitSeq import *
 import random
 
 first_primes_list = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
@@ -11,22 +14,6 @@ first_primes_list = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
 					227, 229, 233, 239, 241, 251, 257,
 					263, 269, 271, 277, 281, 283, 293,
 					307, 311, 313, 317, 331, 337, 347, 349]
-def nBitRandom(n):
-	return random.randrange(2**(n-1)+1, 2**n - 1)
-
-def getLowLevelPrime(n):
-	'''Generate a prime candidate divisible
-	by first primes'''
-	while True:
-		# Obtain a random number
-		pc = nBitRandom(n)
-
-		# Test divisibility by pre-generated
-		# primes
-		for divisor in first_primes_list:
-			if pc % divisor == 0 and divisor**2 <= pc:
-				break
-		else: return pc
 
 
 #accept input
@@ -45,8 +32,8 @@ if i == 'e':
     #merge all the elements to get bit sequence
     a[0:len(a)] = [''.join(a[0 :len(a)])]
     b = a[0] #b = bit sequence
-    #keygen from above func
-    getLowLevelPrime(n)
+    #keygen 
+    
         
 
     
