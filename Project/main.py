@@ -1,4 +1,3 @@
-from time import sleep
 import AES as AES
 import RSA as RSA
 
@@ -16,26 +15,15 @@ def RSA_decrypt(encrypted_key,Private_Key):
     return decrypted_key
 
 
-def effModuloExp(a, m, n):
-    d = 1
-    if 1 & m:
-        d = a
-    while m:
-        m >>= 1
-        a = (a * a) % n
-        if m & 1: d = (d * a) % n
-    return d
-#
-#
-#
-def effModuloExp2(a,n,m):
-    r = 1
-    while n > 0:
-        if n & 1 == 1:
-            r = (r * a) % m
-        a = (a * a) % m
-        n >>= 1
-    return r
+def effModuloExp(a, n, m):
+	r = 1
+	while n > 0:
+		if n & 1 == 1:
+			r = (r * a) % m
+		a = (a * a) % m
+		n >>= 1
+	return r
+
 
 
 def main():

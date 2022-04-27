@@ -48,6 +48,10 @@ def RSA_keygen():
 
     _,_,d = ExtEuclidean(phiOfn,e)
 
+    d = d % phiOfn
+    if(d < 0):
+        d += phiOfn
+
     #if ((d*e)%phiOfn == 1):
         #print("correct")
 
