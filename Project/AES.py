@@ -1,9 +1,8 @@
 from base64 import b64encode, b64decode
 from Crypto.Cipher import AES
 import hashlib
-from base64 import b64encode, b64decode
-import os
 from Cryptodome.Random import get_random_bytes
+
 
 def encrypt(plain_text, password):
     # generate a random salt
@@ -17,7 +16,8 @@ def encrypt(plain_text, password):
     cipher_config = AES.new(private_key, AES.MODE_GCM)
 
     # return a dictionary with the encrypted text
-    cipher_text, tag = cipher_config.encrypt_and_digest(bytes(plain_text, 'utf-8'))
+    cipher_text, tag = cipher_config.encrypt_and_digest(
+        bytes(plain_text, 'utf-8'))
     return {
         'cipher_text': b64encode(cipher_text).decode('utf-8'),
         'salt': b64encode(salt).decode('utf-8'),
@@ -25,13 +25,13 @@ def encrypt(plain_text, password):
         'tag': b64encode(tag).decode('utf-8')
     }
 
+
 def decrypt(enc_dict, password):
     # decode the dictionary entries from base64
     salt = b64decode(enc_dict['salt'])
     cipher_text = b64decode(enc_dict['cipher_text'])
     nonce = b64decode(enc_dict['nonce'])
     tag = b64decode(enc_dict['tag'])
-    
 
     # generate the private key from the password and salt
     private_key = hashlib.scrypt(
@@ -44,6 +44,3 @@ def decrypt(enc_dict, password):
     decrypted = cipher.decrypt_and_verify(cipher_text, tag)
 
     return decrypted
-
-
-
